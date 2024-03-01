@@ -1,31 +1,28 @@
-.list-address {
+.form {
+    border: 1px solid black;
+    width: 320px;
+    padding: 10px;
     display: flex;
+    flex-direction: column;
+    row-gap: 10px;
 }
 
-.item-address {
-    margin-bottom: 20px;
+.field {
     display: flex;
     flex-direction: column;
 }
 
-/* .img-item {
-    display: flex;
-} */
-
-.item {
-    display: flex;
-    align-items: center;
-    
-}
-
-.text-item {
-    margin: 0;
-}
-
 .btn {
-    display: inline-block;
-    border: 1px solid gray;
-    border-radius: 4px;
-    box-shadow: none;
     cursor: pointer;
+    font-size: 18px;
+    width: 120px;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin: 0 auto;
+
+}
+
+
+.error {
+    color: red;
 }

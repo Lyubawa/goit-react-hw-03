@@ -2,26 +2,27 @@ import { useId } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
+import css from './ContactForm.module.css'
 
 const userSchema = Yup.object().shape({
-    username: Yup.string().min(3, "Too short!").max(50, "Too long!").required("Required!"),
+    name: Yup.string().min(3, "Too short!").max(50, "Too long!").required("Required!"),
     number: Yup.string().matches(/^\d{3}-\d{2}-\d{2}$/, "Invalid phone number format").required("Required!"),
 });
 
 const initialValues = {
-    username: "",
+    name: "",
     number: "",
 };
 
 
 export default function ContactForm({ onAdd }) {
-    const usernameFieldId = useId();
+    const nameFieldId = useId();
     const numberFieldId = useId();
 
     const handleSubmit = (values, actions) => {
         onAdd({
             id: nanoid(),
-            username: values.username,
+            name: values.name,
             number: values.number,
         })
         actions.resetForm();
@@ -33,59 +34,20 @@ export default function ContactForm({ onAdd }) {
             validationSchema={userSchema}
             onSubmit={handleSubmit}
         >
-            <Form>
-            <div>
-                <label htmlFor={usernameFieldId}>Name</label>
-                    <Field type="text" name="username" id={usernameFieldId} />
-                    <ErrorMessage name="username" component="span" />
+            <Form className={css.form}>
+            <div className={css.field}>
+                <label htmlFor={nameFieldId}>Name</label>
+                    <Field type="text" name="name" id={nameFieldId} />
+                    <ErrorMessage className={css.error} name="name" component="span" />
             </div>
-            <div>
+            <div className={css.field}>
                 <label htmlFor={numberFieldId}>Number</label>
                     <Field type="text" name="number" id={numberFieldId} />
-                    <ErrorMessage name="number" component="span" />
+                    <ErrorMessage className={css.error} name="number" component="span" />
             </div>
-            <button type="submit">Add contact</button>
+            <button type="submit" className={css.btn}>Add contact</button>
             </Form>
         </Formik>
 
     )
 }
-
-
-// const userSchema = Yup.object().shape({
-//     username: Yup.string().min(3, "Too short!").max(50, "Too long!").required("Required!"),
-//     number: Yup.string().matches(/^\d{3}-\d{2}-\d{2}$/, "Invalid phone number format").required("Required!"),
-// });
-
-// export default function ContactForm({ onAdd }) {
-//     const usernameFieldId = useId();
-//     const numberFieldId = useId();
-
-//     return (
-//         <Formik initialValues={{
-//             username: "",
-//             number: "",
-//         }}
-//             validationSchema={userSchema}
-//             onSubmit={(values, actions) => {
-//             const model = { ...values, id: nanoid() };
-//             onAdd(model);
-//             actions.resetForm();
-//         }}>
-//             <Form>
-//             <div>
-//                 <label htmlFor={usernameFieldId}>Name</label>
-//                     <Field type="text" name="username" id={usernameFieldId} />
-//                     <ErrorMessage name="username" component="span" />
-//             </div>
-//             <div>
-//                 <label htmlFor={numberFieldId}>Number</label>
-//                     <Field type="text" name="number" id={numberFieldId} />
-//                     <ErrorMessage name="number" component="span" />
-//             </div>
-//             <button type="submit">Add contact</button>
-//             </Form>
-//         </Formik>
-
-//     )
-// }
