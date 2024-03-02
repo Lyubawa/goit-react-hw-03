@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './App.module.css'
+import css from  './App.module.css'
 import ContactsBook from './components/contact.json'
 import ContactForm from './components/ContactForm/ContactForm'
 import ContactList from './components/ContactList/ContactList'
@@ -37,7 +37,7 @@ export default function App() {
     contact.name && contact.name.toLowerCase().includes(filter.toLowerCase()));
 
   return (
-  <div className={CSS.container}>
+  <div className={css.container}>
   <h1>Phonebook</h1>
       <ContactForm onAdd={addContact} />
       <SearchBox value={filter} onFilter={setFilter} />
